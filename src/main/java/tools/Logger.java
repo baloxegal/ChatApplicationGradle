@@ -7,17 +7,31 @@ import org.aspectj.lang.annotation.Before;
 @Aspect
 public class Logger {
 	
-	@Before("call(client.ChatApplication.main(..))")
-	private void LogBeforStartClient() {
+	@Before("execution(* client.ChatApplicationClient.main(..))")
+	public void LogBeforStartClient() {
 		
-		System.out.println("Chat Starting");
+		System.out.println("Client Starting");
 		
 	}
 	
-	@After("call(client.ChatApplication.main(..))")
-	private void LogAfterStartClient() {
+	@Before("execution(* server.ChatApplicationServer.main(..))")
+	public void LogBeforStartServer() {
 		
-		System.out.println("Chat Ending");
+		System.out.println("Server Starting");
+		
+	}
+	
+	@After("execution(* client.ChatApplicationClient.main(..))")
+	public void LogAfterEndClient() {
+		
+		System.out.println("Client Ending");
+		
+	}	
+	
+	@After("execution(* server.ChatApplicationServer.main(..))")
+	public void LogAfterEndServer() {
+		
+		System.out.println("Client Ending");
 		
 	}
 	

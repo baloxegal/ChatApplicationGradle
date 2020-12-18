@@ -7,13 +7,11 @@ import java.net.Socket;
 
 //import lib.Message;
 
-public class ChatApplication {
+public class ChatApplicationServer {
 	
 	public static final Integer PORT = 7777;
 
 	public static void main(String[] args) throws IOException, ClassNotFoundException {
-		
-		System.out.println("Server Starting");
 		
 		ServerSocket serverSocket = new ServerSocket(PORT);
 		
@@ -27,9 +25,7 @@ public class ChatApplication {
 		System.out.println("Client sends: " + din.readObject());
 		
 		din.close();
-		
-		System.out.println("Server Ending");
-
+		serverSocket.close();		
 	}
 
 }

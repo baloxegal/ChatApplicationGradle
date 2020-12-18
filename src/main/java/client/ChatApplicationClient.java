@@ -7,13 +7,13 @@ import java.net.Socket;
 
 import lib.Message;
 
-public class ChatApplication {
+public class ChatApplicationClient {
 
 	public static void main(String[] args) throws IOException {		
 		
 		Message message = new Message("Hello Server!");
 		
-		Socket clientSocket = new Socket(InetAddress.getLoopbackAddress(), server.ChatApplication.PORT);
+		Socket clientSocket = new Socket(InetAddress.getLoopbackAddress(), server.ChatApplicationServer.PORT);
 		
 		ObjectOutputStream dout = new ObjectOutputStream(clientSocket.getOutputStream());
 		
