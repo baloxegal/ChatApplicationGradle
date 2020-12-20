@@ -1,8 +1,10 @@
-package tools;
+package lib.tools;
 
-import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.JoinPoint;
 
 @Aspect
 public class Logger {
@@ -21,6 +23,15 @@ public class Logger {
 		
 	}
 	
+	@AfterReturning(value = "call(* fetch())", returning = "transferredData")
+	public void LogAfterServerReading(JoinPoint jp, Object transferredData) {			
+		if(jp.getSourceLocation().getWithinType().equals(server.ChatApplicationServer.class))
+			System.out.println("Client sends: " + transferredData);
+		else if(jp.getSourceLocation().getWithinType().equals(client.ChatApplicationClient.class))
+			System.out.println("Server sends: " + transferredData);
+		
+	}	
+	
 	@After("execution(* client.ChatApplicationClient.main(..))")
 	public void LogAfterEndClient() {
 		
@@ -31,8 +42,7 @@ public class Logger {
 	@After("execution(* server.ChatApplicationServer.main(..))")
 	public void LogAfterEndServer() {
 		
-		System.out.println("Client Ending");
+		System.out.println("Server Ending");
 		
-	}
-	
+	}	
 }

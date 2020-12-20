@@ -1,11 +1,12 @@
 package server;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.net.ServerSocket;
-import java.net.Socket;
+import lib.Connection;
+import lib.Message;
+import lib.Action;
+import lib.Operation;
+import lib.User;
 
-//import lib.Message;
+import java.io.IOException;
 
 public class ChatApplicationServer {
 	
@@ -13,19 +14,11 @@ public class ChatApplicationServer {
 
 	public static void main(String[] args) throws IOException, ClassNotFoundException {
 		
-		ServerSocket serverSocket = new ServerSocket(PORT);
+		Connection conn = new Connection(PORT);		
 		
-		Socket clientSocket = serverSocket.accept();
-		
-		ObjectInputStream din = new ObjectInputStream(clientSocket.getInputStream());
-		
-//		Message message = (Message) din.readObject();		
-//		System.out.println("Client sends: " + message.getBody());
-		
-		System.out.println("Client sends: " + din.readObject());
-		
-		din.close();
-		serverSocket.close();		
+		conn.fetch();
+		conn.send(new Action(Operation.SEND_MSG, new Message("Hello Back!", new User("Mister Egor"), new User("Mister Alesha"))));
+		conn.fetch();				
+		conn.send(new Action(Operation.CONFITMED));
 	}
-
 }
