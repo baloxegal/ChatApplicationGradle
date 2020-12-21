@@ -1,10 +1,7 @@
 package lib;
 
-import java.io.Serializable;
-
-public class User implements Serializable {
+public class User {
 	
-	private static final long serialVersionUID = -2528527689894598775L;
 	private String name;
 
 	public User(String name) {

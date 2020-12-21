@@ -1,10 +1,7 @@
 package lib;
 
-import java.io.Serializable;
-
-public class Message implements Serializable {
+public class Message {
 	
-	private static final long serialVersionUID = -4727747511054555717L;
 	private String body;
 	private User fromUser;
 	private User toUser;

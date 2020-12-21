@@ -1,10 +1,7 @@
 package lib;
 
-import java.io.Serializable;
-
-public class Action implements Serializable {
+public class Action {
 	
-	private static final long serialVersionUID = -5277267620567763963L;
 	private Operation type;
 	private Object target;
 
